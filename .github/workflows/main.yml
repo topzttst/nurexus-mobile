@@ -4,20 +4,26 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    # This forces the runner to use Node 24 for all actions in this job
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     
     steps:
-      # v4 is the stable version; we use an environment variable to handle the Node 24 warning
       - name: Checkout code
         uses: actions/checkout@v4
-        env:
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-      # v2 is the correct stable version for this action as of today
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
           channel: 'stable'
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
@@ -25,7 +31,6 @@ jobs:
       - name: Build APK
         run: flutter build apk --debug
 
-      # v4 is the current stable release for uploading
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
