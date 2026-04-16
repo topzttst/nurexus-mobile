@@ -4,18 +4,17 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    # This ensures the builder uses the newest 2026 engine immediately
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+    
     steps:
-      # Updated to v6 (Supports Node 24 natively)
+      # v4 is the stable version; we use an environment variable to handle the Node 24 warning
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-      # Updated to v3 (Supports newest Node/Flutter environments)
+      # v2 is the correct stable version for this action as of today
       - name: Setup Flutter
-        uses: subosito/flutter-action@v3
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
           channel: 'stable'
@@ -26,9 +25,9 @@ jobs:
       - name: Build APK
         run: flutter build apk --debug
 
-      # Updated to v5 (The newest version for 2026)
+      # v4 is the current stable release for uploading
       - name: Upload APK
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: nurexus-app
           path: build/app/outputs/flutter-apk/app-debug.apk
