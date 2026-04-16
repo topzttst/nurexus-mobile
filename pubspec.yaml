@@ -1,0 +1,6 @@
+name: nurexus_app
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  uses-material-design: true
