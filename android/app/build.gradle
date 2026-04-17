@@ -32,14 +32,12 @@ android {
 
     defaultConfig {
         applicationId "com.publisher.nurexus"
-        // Set to 21 to support older Android phones
         minSdkVersion 21
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    // --- THIS IS THE FIX FOR THE JAVA 17 ERROR ---
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -48,12 +46,15 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    // ----------------------------------------------
 
     buildTypes {
         release {
-            // Using debug signing for now so Codemagic can build it without a key
-            signingConfig signingConfigs.debug
+            // --- SIZE REDUCTION SETTINGS ---
+            minifyEnabled true         // Removes unused code
+            shrinkResources true      // Removes unused images/resources
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            signingConfig signingConfigs.debug // Temporary for testing
         }
     }
 }
