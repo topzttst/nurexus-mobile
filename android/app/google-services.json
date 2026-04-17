@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "56974215210",
+    "project_id": "nurexus-app",
+    "storage_bucket": "nurexus-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56974215210:android:41b1d89410e53fdb1c1b53",
+        "android_client_info": {
+          "package_name": "com.publisher.nurexus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWb3-1XLHwhS_8X90Om13Lup39RqBao5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
