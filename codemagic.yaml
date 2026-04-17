@@ -11,16 +11,14 @@ workflows:
       flutter: stable
     scripts:
       - name: Get Flutter packages
-        script: |
-          flutter packages pub get
+        script: flutter packages pub get
       - name: Build Android APK
-        script: |
-          flutter build apk --debug
+        script: flutter build apk --debug
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
     publishing:
       firebase:
-        service_account: $FIREBASE_SERVICE_ACCOUNT_JSON
+        firebase_service_account_json: $FIREBASE_SERVICE_ACCOUNT_JSON
         android:
           app_id: $FIREBASE_APP_ID
           groups:
