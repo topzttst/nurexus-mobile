@@ -4,8 +4,7 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
-      groups:
-        - publish
+      # We removed the 'groups' line entirely
       vars:
         FIREBASE_APP_ID: "1:56974215210:android:41b1d89410e53fdb1c1b53"
       flutter: stable
@@ -18,7 +17,8 @@ workflows:
       - build/app/outputs/flutter-apk/*.apk
     publishing:
       firebase:
-        firebase_service_account_json: $FIREBASE_SERVICE_ACCOUNT_JSON
+        # This will now look directly for the variable you just saved
+        service_account: $FIREBASE_SERVICE_ACCOUNT_JSON
         android:
           app_id: $FIREBASE_APP_ID
           groups:
